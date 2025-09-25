@@ -1,0 +1,9 @@
+{
+    "execution_id": "DDL_20250925_034743_155073",
+    "start_time": "2025-09-25T03:47:43-04:00",
+    "start_timestamp": 1758786463,
+    "config_file": "ddl_config.conf",
+    "script_count": 6,
+    "status": "RUNNING",
+    "scripts": []
+}
