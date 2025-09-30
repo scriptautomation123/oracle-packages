@@ -1,0 +1,69 @@
+=====================================================
+ORACLE 19c PARTITION SUPPORT - QUICK REFERENCE
+table_ddl_pkg Comprehensive Partitioning
+=====================================================
+
+SINGLE-LEVEL PARTITIONING
+-------------------------
+✓ RANGE          - Time-series, sequential values
+✓ LIST           - Discrete values, categories  
+✓ HASH           - Even distribution, load balancing
+✓ INTERVAL       - Automatic RANGE partition creation
+✓ REFERENCE      - Parent-child relationships
+✓ AUTO_LIST      - Automatic LIST partition (19c)
+
+COMPOSITE PARTITIONING (2-LEVEL)
+--------------------------------
+Range-Based:
+✓ RANGE-RANGE    ✓ RANGE-HASH    ✓ RANGE-LIST
+
+List-Based:
+✓ LIST-RANGE     ✓ LIST-HASH     ✓ LIST-LIST
+
+Hash-Based (19c):
+✓ HASH-RANGE     ✓ HASH-HASH     ✓ HASH-LIST
+
+ADVANCED FEATURES
+-----------------
+✓ Multi-column LIST      - Multiple partition keys
+✓ Interval-Reference     - Auto + relationship
+✓ Virtual column         - Partition on expressions
+✓ Per-partition TS       - Different tablespaces
+
+USAGE EXAMPLES
+--------------
+See: refactored/examples/partition_types_examples.sql
+
+KEY FIELDS IN partition_def
+---------------------------
+partition_type        - RANGE|LIST|HASH|INTERVAL|REFERENCE|AUTO_LIST
+subpartition_type     - RANGE|LIST|HASH (for composite)
+column_list           - Partition key column(s)
+values_clause         - Partition boundary values
+interval_expr         - For INTERVAL (e.g., '1 DAY')
+reference_constraint  - For REFERENCE partitioning
+auto_list_enabled     - For AUTO_LIST (19c)
+
+PRODUCTION PATTERNS
+-------------------
+1. INTERVAL          → Logs, events (zero maintenance)
+2. RANGE-HASH        → High-volume transactional
+3. LIST              → Static categories (regions)
+4. HASH              → User data, random distribution
+5. REFERENCE         → Orders/order_items relationships
+
+FILES MODIFIED
+--------------
+✓ table_ddl_pkg.sql         - Enhanced partition_def
+✓ table_ddl_pkg_body.sql    - build_partition_clause()
+✓ PARTITION_SUPPORT.md      - Full documentation
+✓ partition_types_examples.sql - Complete examples
+
+TEST COMMAND
+------------
+@refactored/examples/partition_types_examples.sql
+
+=====================================================
+All Oracle 19c partition types fully supported
+=====================================================
+
